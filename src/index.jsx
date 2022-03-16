@@ -343,9 +343,8 @@ export const parseImageRef = (id) => {
   }
 }
 
-export const imageUrl = (asset, params = {}) =>
-  {
-    const url = Object.entries({ ...DEFAULT_IMAGE_CONFIG, ...params })
+export const imageUrl = (asset, params = {}) => {
+  const url = Object.entries({ ...DEFAULT_IMAGE_CONFIG, ...params })
     .reduce(
       (acc, [key, value]) =>
         value
@@ -356,17 +355,20 @@ export const imageUrl = (asset, params = {}) =>
       builder.image(asset)
     )
     .url()
-    const splitUrl =  url.split('?')
-    if ((splitUrl.length === 2) && asset.originalFilename) {
-      const regex = /(?<!\s)\s(?!\s)/g
-      const originalFilenameSlug = asset.originalFilename.toLowerCase().trim().split(regex).join('-')
-      const urlFilename =  `${splitUrl[0]}/${originalFilenameSlug}?${splitUrl[1]}`
-      return urlFilename
-    }
-    else {
-      return url
-    }
+  const splitUrl = url.split("?")
+  if (splitUrl.length === 2 && asset.originalFilename) {
+    const regex = /(?<!\s)\s(?!\s)/g
+    const originalFilenameSlug = asset.originalFilename
+      .toLowerCase()
+      .trim()
+      .split(regex)
+      .join("-")
+    const urlFilename = `${splitUrl[0]}/${originalFilenameSlug}?${splitUrl[1]}`
+    return urlFilename
+  } else {
+    return url
   }
+}
 
 const logImage = (assetId, message) => {
   const previewImage = imageUrl(
