@@ -357,12 +357,7 @@ export const imageUrl = (asset, params = {}) => {
     .url()
   const splitUrl = url.split("?")
   if (splitUrl.length === 2 && asset.originalFilename) {
-    const regex = /(?<!\s)\s(?!\s)/g
-    const originalFilenameSlug = asset.originalFilename
-      .toLowerCase()
-      .trim()
-      .split(regex)
-      .join("-")
+    const originalFilenameSlug = encodeURIComponent(asset.originalFilename.toLowerCase().trim());
     const urlFilename = `${splitUrl[0]}/${originalFilenameSlug}?${splitUrl[1]}`
     return urlFilename
   } else {

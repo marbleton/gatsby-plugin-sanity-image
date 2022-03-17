@@ -228,8 +228,7 @@ var imageUrl = (asset, params = {}) => {
   const url = Object.entries({ ...DEFAULT_IMAGE_CONFIG, ...params }).reduce((acc, [key, value]) => value ? Array.isArray(value) ? acc[key](...value) : acc[key](value) : acc, builder.image(asset)).url();
   const splitUrl = url.split("?");
   if (splitUrl.length === 2 && asset.originalFilename) {
-    const regex = /(?<!\s)\s(?!\s)/g;
-    const originalFilenameSlug = asset.originalFilename.toLowerCase().trim().split(regex).join("-");
+    const originalFilenameSlug = encodeURIComponent(asset.originalFilename.toLowerCase().trim());
     const urlFilename = `${splitUrl[0]}/${originalFilenameSlug}?${splitUrl[1]}`;
     return urlFilename;
   } else {
