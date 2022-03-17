@@ -57,7 +57,6 @@
   },
   "scripts": {
     "prebuild": "tsc",
-    "build": "node ./build.js",
-    "postinstall": "cd node_modules/gatsby-plugin-sanity-image && yarn install && yarn build"
+    "build": "node ./build.js"
   }
 }
